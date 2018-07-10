@@ -1,0 +1,52 @@
+<head>
+    <script type="text/javascript" charset="utf8" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+</head>
+
+<h2>{{ .Title }}</h2>
+<h4>{{ .Employees }}</h4>
+
+<table class="employeeTable display" data-page-length='4'>
+    <thead>
+        <th>Employee ID from Key</th>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Employee Department</th>
+    </thead>
+    <tbody>
+        {{ range $key, $value := .Employees}}
+        <tr>
+            <td>{{ $key }}</td>
+            <td>{{ $value.EmpId }}</td>
+            <td>{{ $value.EmpName }}</td>
+            <td>{{ $value.EmpDepartment }}</td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
+
+<h4>{{ .ArrEmployees }}</h4>
+
+<table class="employeeTable display" data-page-length='2'>
+    <thead>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Employee Department</th>
+    </thead>
+    <tbody>
+        {{ range $emp := .ArrEmployees}}
+        <tr>
+            <td>{{ $emp.EmpId }}</td>
+            <td>{{ $emp.EmpName }}</td>
+            <td>{{ $emp.EmpDepartment }}</td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $(".employeeTable").DataTable();
+    });
+</script>
