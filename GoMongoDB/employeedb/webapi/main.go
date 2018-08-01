@@ -168,3 +168,8 @@ func main() {
 	log.Fatal(srv.ListenAndServe())
 
 }
+
+// go get -u github.com/rishikeshjadhav/GO/tree/master/GoMongoDB/employeedb/webapi/config
+// go get -u github.com/rishikeshjadhav/GO/tree/master/GoMongoDB/employeedb/webapi/dao
+// go get -u github.com/rishikeshjadhav/GO/tree/master/GoMongoDB/employeedb/webapi/models
+// go get -u github.com/rishikeshjadhav/GO/tree/master/GoMongoDB/employeedb/webapi
