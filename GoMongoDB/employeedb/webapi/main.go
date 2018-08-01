@@ -63,12 +63,12 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Printf("\Updating user with Object Id as %s\n", emp.ID)
+	fmt.Printf("\nUpdating user with Object Id as %s\n", emp.ID)
 	if err := dao.Update(emp); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Update - Invalid request payload")
 		return
 	}
-	fmt.Printf("\Updated user with Object Id as %s and Code as %s\n", emp.ID, emp.Code)
+	fmt.Printf("\nUpdated user with Object Id as %s and Code as %s\n", emp.ID, emp.Code)
 	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
 }
 
