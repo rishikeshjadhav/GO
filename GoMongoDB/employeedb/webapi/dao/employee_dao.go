@@ -30,6 +30,9 @@ func (m *EmployeeDAO) Connect() {
 	}
 	fmt.Printf("\nConnecting to database %s\n", m.Database)
 	db := session.DB(m.Database)
+	if db == nil {
+		fmt.Println("DB is nil")
+	}
 	fmt.Println(db)
 }
 
