@@ -39,6 +39,9 @@ func (m *EmployeeDAO) Connect() {
 // Function to create the employee
 func (m *EmployeeDAO) Create(employee models.Employee) error {
 	fmt.Println("DAO HIT -> Create")
+	if db == nil {
+		fmt.Println("DB is nil")
+	}
 	err := db.C(COLLECTION).Insert(&employee)
 	return err
 }
