@@ -30,6 +30,7 @@ func (m *EmployeeDAO) Connect() {
 	}
 	fmt.Printf("\nConnecting to database %s\n", m.Database)
 	db := session.DB(m.Database)
+	fmt.println(db)
 }
 
 // Function to create the employee
