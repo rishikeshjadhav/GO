@@ -1,12 +1,13 @@
 package dao
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
-	"net/http"
+
+	"github.com/rishikeshjadhav/GO/GoMongoDB/employeedb/webapi/models"
 
 	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type EmployeeDAO struct {
@@ -22,41 +23,40 @@ const (
 
 // Function to establish a connection to MongoDB
 func (m *EmployeeDAO) Connect() {
+	fmt.Printf("\nStarting connection with server %s\n", m.Server)
 	session, err := mgo.Dial(m.Server)
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Printf("\nConnecting to database %s\n", m.Database)
 	db := session.DB(m.Database)
 }
 
 // Function to create the employee
-func Create(employee Employee) {
-	defer r.Body.Close()
-
-	var emp Employee
-	if err := json.NewDecoder(r.Body).Decode(&emp); err != nil {
-		respond
-	}
-
-	fmt.Fprintln(w, "Create: not implemented yet")
+func (m *EmployeeDAO) Create(employee models.Employee) error {
+	fmt.Println("DAO HIT -> Create")
+	err := db.C(COLLECTION).Insert(&employee)
+	return err
 }
 
 // Function to fetch employee(s)
-func Get(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Get: not implemented yet")
+func (m *EmployeeDAO) Get() ([]models.Employee, error) {
+	fmt.Println("DAO HIT -> Get")
+	var employees []models.Employee
+	err := db.C(COLLECTION).Find(bson.M{}).All(&employees)
+	return employees, err
 }
 
 // Function to update the employee
-func Update(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Update: not implemented yet")
+func (m *EmployeeDAO) Update(employee models.Employee) error {
+	fmt.Println("DAO HIT -> Update")
+	err := db.C(COLLECTION).UpdateId(employee.ID, &employee)
+	return err
 }
 
 // Function to delete the employee
-func Delete(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Delete: not implemented yet")
-}
-
-// Function to Welcome the user
-func Welcome(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Welcome: not implemented yet")
+func (m *EmployeeDAO) Delete(employee models.Employee) error {
+	fmt.Println("DAO HIT -> Delete")
+	err := db.C(COLLECTION).Remove(&employee)
+	return err
 }
