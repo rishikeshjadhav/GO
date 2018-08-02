@@ -3,9 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
-	"time"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -151,21 +149,21 @@ func main() {
 	r.HandleFunc("/Update", Update).Methods("PUT")
 	r.HandleFunc("/Delete", Delete).Methods("DELETE")
 
-	// http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":3000", r)
 
 	// Create server with handler and timeouts
-	srv := &http.Server{
-		Handler:      r,
-		Addr:         "localhost:3000",
-		WriteTimeout: 15 * time.Second,
-		ReadTimeout:  15 * time.Second,
-		IdleTimeout:  60 * time.Second,
-	}
+	// srv := &http.Server{
+	// 	Handler:      r,
+	// 	Addr:         "localhost:3000",
+	// 	WriteTimeout: 15 * time.Second,
+	// 	ReadTimeout:  15 * time.Second,
+	// 	IdleTimeout:  60 * time.Second,
+	// }
 
 	fmt.Println("Listening on port 3000")
 
 	// Listen and serve incoming requests
-	log.Fatal(srv.ListenAndServe())
+	// log.Fatal(srv.ListenAndServe())
 
 }
 
