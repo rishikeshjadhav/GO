@@ -46,8 +46,16 @@ func (m *EmployeeDAO) Create(employee models.Employee) error {
 
 		fmt.Println("Created connection with DB")
 	}
-	err := db.C(COLLECTION).Insert(&employee)
-	return err
+
+	session1, err1 := mgo.Dial(m.Server)
+	if err1 != nil {
+		log.Fatal(err1)
+	}
+	fmt.Printf("\nConnecting to database 1 %s\n", m.Database)
+	db1 := session1.DB(m.Database)
+
+	err2 := db1.C(COLLECTION).Insert(&employee)
+	return err2
 }
 
 // Function to fetch employee(s)
