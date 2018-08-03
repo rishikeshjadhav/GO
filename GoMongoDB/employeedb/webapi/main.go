@@ -11,12 +11,12 @@ import (
 
 	"github.com/gorilla/mux"
 	configpkg "github.com/rishikeshjadhav/GO/GoMongoDB/employeedb/webapi/config"
-	daopkg "github.com/rishikeshjadhav/GO/GoMongoDB/employeedb/webapi/dao"
+	. "github.com/rishikeshjadhav/GO/GoMongoDB/employeedb/webapi/dao"
 	modelspkg "github.com/rishikeshjadhav/GO/GoMongoDB/employeedb/webapi/models"
 )
 
 var config = configpkg.Config{}
-var dao = daopkg.EmployeeDAO{}
+var dao = EmployeeDAO{}
 
 // Function to create the employee
 func Create(w http.ResponseWriter, r *http.Request) {

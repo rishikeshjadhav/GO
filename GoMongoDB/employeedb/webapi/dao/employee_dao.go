@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
@@ -39,6 +40,9 @@ func (m *EmployeeDAO) Connect() {
 // Function to create the employee
 func (m *EmployeeDAO) Create(employee models.Employee) error {
 	fmt.Println("DAO HIT -> Create")
+	if db == nil {
+		return returnWithError("Create - DB is nil")
+	}
 	err := db.C(COLLECTION).Insert(&employee)
 	return err
 }
@@ -63,4 +67,10 @@ func (m *EmployeeDAO) Delete(employee models.Employee) error {
 	fmt.Println("DAO HIT -> Delete")
 	err := db.C(COLLECTION).Remove(&employee)
 	return err
+}
+
+// Function to return with errors
+func returnWithError(message string) error {
+	fmt.Println(message)
+	return errors.New(message)
 }
