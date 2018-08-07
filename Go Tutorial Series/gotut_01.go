@@ -1,9 +1,11 @@
 package main
 
-import ("fmt")
+import (
+	"fmt"
+)
 
 func multiple(a, b string) (string, string) {
-	return a,b
+	return a, b
 }
 
 func main() {
